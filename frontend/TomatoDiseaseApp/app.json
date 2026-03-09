@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "tomatodiseaseapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    //"newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
@@ -18,7 +18,7 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
+      //"edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "web": {
@@ -37,6 +37,18 @@
           "dark": {
             "backgroundColor": "#000000"
           }
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow TomatoDiseaseApp to access your camera to photograph tomato leaves."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow TomatoDiseaseApp to access your photos to select tomato leaf images."
         }
       ]
     ],
