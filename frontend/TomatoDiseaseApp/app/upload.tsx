@@ -1,13 +1,15 @@
-import { View, Text, Button, Image, TouchableOpacity } from "react-native"
+import { View, Text, Button, Image, TouchableOpacity, ActivityIndicator, Alert } from "react-native"
 import * as ImagePicker from "expo-image-picker"
 import { useState } from "react"
 import { router } from "expo-router"
 import CameraCapture from "../components/CameraView"
+import { predictDisease } from "../services/api"
 
 export default function UploadScreen() {
 
   const [image, setImage] = useState<string | null>(null)
   const [showCamera, setShowCamera] = useState(false)
+  const [loading,setLoading] = useState(false)
 
   const pickImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
@@ -31,6 +33,34 @@ export default function UploadScreen() {
    const handleCapture = (uri: string) => {
     setImage(uri)
     setShowCamera(false)
+  }
+
+  const runPrediction = async () => {
+    
+    if (!image) return
+    
+    try{
+        setLoading(true)
+        const result = await predictDisease(image)
+        router.push({
+        pathname:"/result",
+        params:{
+          image,
+          disease: result.disease,
+          confidence: result.confidence_pct
+        }
+      })
+        
+    } catch (error: any) {
+         if(error.response){
+        Alert.alert("Prediction Error", error.response.data.error)
+      } else {
+        Alert.alert("Network Error","Check server connection")
+      }
+
+    }finally {
+        setLoading(false)
+    }
   }
 
    if (showCamera) {
@@ -90,15 +120,22 @@ return (
     )}
 
     {image && (
-      <Button
-        title="Analyse"
-        onPress={() =>
-          router.push({
-            pathname:"/result" as any,
-            params:{image}
-          })
-        }
-      />
+        <TouchableOpacity
+            onPress={runPrediction}
+            style={{
+            backgroundColor:"#2E7D32",
+            padding:12,
+            marginTop:10,
+            borderRadius:8,
+            opacity: loading ? 0.6 : 1
+            }}
+            disabled={loading}
+        >
+            <Text style={{color:"white",fontWeight:"bold"}}>Analyse</Text>
+        </TouchableOpacity>
+    )}
+    {loading && (
+        <ActivityIndicator size="large" style={{marginTop:20}} />
     )}
 
   </View>

@@ -15,12 +15,23 @@ export const checkHealth = async () => {
 
 //to send image to backend for disease prediction
 export const predictDisease = async (imageUri: string) => {
+
   const formData = new FormData()
+
+  const filename = imageUri.split("/").pop() || "image.jpg"
+  const ext = filename.split(".").pop()
+
+  const mimeType =
+    ext === "png"
+      ? "image/png"
+      : ext === "webp"
+      ? "image/webp"
+      : "image/jpeg"
 
   formData.append("image", {
     uri: imageUri,
-    type: "image/jpeg",
-    name: "upload.jpg",
+    name: filename,
+    type: mimeType,
   } as any)
 
   const response = await apiClient.post("/predict", formData, {
