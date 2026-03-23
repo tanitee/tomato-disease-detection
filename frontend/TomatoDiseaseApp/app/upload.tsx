@@ -47,7 +47,8 @@ export default function UploadScreen() {
         params:{
           image,
           disease: result.disease,
-          confidence: result.confidence_pct
+          confidence: result.confidence_pct,
+          time : result.latency_s
         }
       })
         

@@ -4,7 +4,7 @@ import { router } from "expo-router"
 
 export default function ResultScreen() {
 
-  const { image, disease, confidence } = useLocalSearchParams()
+  const { image, disease, confidence, time } = useLocalSearchParams()
 
   return (
     <View style={styles.container}>
@@ -20,6 +20,10 @@ export default function ResultScreen() {
 
       <Text style = {styles.confidence}>
         Confidence: {confidence}%
+      </Text>
+
+      <Text style = {styles.confidence}>
+        Inference Time: {time} seconds
       </Text>
 
       <TouchableOpacity
