@@ -86,7 +86,9 @@ return (
     ) : (
       <Image
         source={{uri:image}}
-        style={{width:360,height:400,marginTop:20}}
+        style={{width: "85%",
+        height: 300,
+        resizeMode: "cover"}}
       />
     )}
 
@@ -103,7 +105,14 @@ return (
         <Text style={{color:"white", fontWeight:"bold"}}>Pick Image</Text>
       </TouchableOpacity>
     ) : (
-      <Button title="Clear Image" onPress={() => setImage(null)} />
+      <TouchableOpacity onPress={() => setImage(null)} style={{
+            backgroundColor: "#c40000",
+            padding: 12,
+            marginTop: 15,
+            borderRadius: 8
+        }}>
+        <Text style={{color:"white", fontWeight:"bold"}}>Clear Image</Text>
+      </TouchableOpacity>
     )}
 
     {/* Camera button */}
