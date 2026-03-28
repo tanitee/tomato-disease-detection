@@ -23,7 +23,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
 
       <Text style={styles.title}>
-        AgriTect: Tomato Disease Detector
+        Tomato Disease Detector
       </Text>
 
       <Text style={styles.status}>

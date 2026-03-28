@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: tomato-disease-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app -c gunicorn_config.py

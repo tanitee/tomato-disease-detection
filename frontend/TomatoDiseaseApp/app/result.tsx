@@ -23,7 +23,7 @@ export default function ResultScreen() {
       </Text>
 
       <Text style = {styles.confidence}>
-        Inference Time: {time} seconds
+        Time Taken: {time} seconds
       </Text>
 
       <TouchableOpacity
