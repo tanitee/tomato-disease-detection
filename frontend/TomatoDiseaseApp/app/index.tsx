@@ -7,7 +7,7 @@ export default function HomeScreen() {
 
   const [serverStatus, setServerStatus] = useState("checking...")
 
-  useEffect(() => {
+  const checkServer = () => {
     checkHealth()
       .then(data => {
         if (data.model_loaded) {
@@ -17,6 +17,14 @@ export default function HomeScreen() {
         }
       })
       .catch(() => setServerStatus("Server Unreachable"))
+  }
+
+  useEffect(() => {
+    checkServer()
+
+    const interval = setInterval(checkServer, 2000)
+
+    return () => clearInterval(interval)
   }, [])
 
   return (

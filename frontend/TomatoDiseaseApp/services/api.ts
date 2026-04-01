@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const BASE_URL = "http://192.168.0.157:5000" 
+const BASE_URL = "https://tomato-disease-api-dupe.onrender.com" 
 
 //axios instance with base URL and timeout settings
 const apiClient = axios.create({
